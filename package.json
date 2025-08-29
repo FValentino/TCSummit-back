@@ -1,0 +1,20 @@
+{
+  "name": "tcsummit-back",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "El proyecto contiene el backend de la pgina tcsummit",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valentino Farias",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "googleapis": "^159.0.0",
+    "nodemailer": "^7.0.5"
+  }
+}

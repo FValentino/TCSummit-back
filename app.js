@@ -8,7 +8,10 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "https://www.tcsummit.com.ar",  
+  origin: [
+  "https://tcsummit.com.ar",
+  "https://www.tcsummit.com.ar"
+],  
   methods: ["POST"],
   allowedHeaders: ["Content-Type"]
 }));

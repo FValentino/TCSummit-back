@@ -14,6 +14,11 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// despertar servidor
+app.get('/', (req, res) => {
+  res.send('despertar servidor');
+});
+
 // Rutas
 app.use("/api", emailRoutes);
 

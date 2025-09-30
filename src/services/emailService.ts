@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import transporter from "../../config/emailConfig.js"
+import transporter from "../config/emailConfig"
 
 dotenv.config();
 
@@ -13,8 +13,7 @@ export class EmailService{
         subject: "Comunicacion a traves de la pagina",
         text: text
       });
-
-      console.log("✅ Email enviado:", info.messageId);
+      
       return info;
     } catch (error) {
       console.error("❌ Error al enviar email:", error);

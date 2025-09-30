@@ -1,7 +1,9 @@
-import express from "express";
+import express,  {json} from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import emailRoutes from "./routes/email/emailRoutes.js";
+import emailRoutes from "./routes/emailRoutes";
+import { AppDataSource } from "./config/dataSource";
+import paymentRoutes from "./routes/paymentRoutes";
 
 dotenv.config();
 
@@ -15,17 +17,31 @@ app.use(cors({
   methods: ["POST"],
   allowedHeaders: ["Content-Type"]
 }));
-app.use(express.json());
 
-// despertar servidor
-app.get('/', (req, res) => {
-  res.send('despertar servidor');
-});
+app.use(json());
 
-// Rutas
-app.use("/api", emailRoutes);
+const initApp = async () => {
+  try {
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+    // Conexion a base de datos
+    await AppDataSource.initialize();
+    console.log("Conexion establecida")
+
+    // Rutas
+    app.get('/', (req, res) => res.send('Servidor funcionando'));
+    
+    app.use('/api/payment', paymentRoutes);
+    app.use("/api/email", emailRoutes);
+
+
+    // Iniciar servidor
+    app.listen(process.env.PORT || 8080, () => {
+      console.log('API funcionando en el puerto ' + process.env.PORT);
+    });
+  } catch (error) {
+    console.error("❌ Error initializing app:", error);
+    process.exit(1);
+  }
+};
+
+initApp();

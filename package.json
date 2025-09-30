@@ -1,7 +1,6 @@
 {
   "name": "tcsummit-back",
   "version": "1.0.0",
-  "type": "module",
   "description": "El proyecto contiene el backend de la pgina tcsummit",
   "main": "index.js",
   "scripts": {
@@ -17,7 +16,9 @@
     "express": "^5.1.0",
     "googleapis": "^159.0.0",
     "nodemailer": "^7.0.5",
-    "ts-node-dev": "^2.0.0"
+    "pg": "^8.16.3",
+    "ts-node-dev": "^2.0.0",
+    "typeorm": "^0.3.27"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

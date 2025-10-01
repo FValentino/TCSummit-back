@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
 import dns from "dns";
-import { Client, Purchase, Ticket, TicketType } from "../entity";
+import { Client, Purchase, Ticket, TicketType, TicketUse } from "../entity";
 
 dns.setDefaultResultOrder("ipv4first");
 dotenv.config();
@@ -20,7 +20,7 @@ export const AppDataSource = new DataSource({
   : false,
   synchronize: !isProduction, 
   logging: true,
-  entities: [Ticket, TicketType, Client, Purchase],
+  entities: [Ticket, TicketType, TicketUse, Client, Purchase],
   migrations: ["src/migrations/*.ts"],
   subscribers: [],
 });

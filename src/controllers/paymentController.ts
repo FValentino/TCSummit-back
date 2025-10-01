@@ -23,6 +23,11 @@ export class PaymentController{
     try{
       const result = await this.paymentService.paymentSuccesfull(ticketData, client, "paymentId")
 
+      if (!result) {
+        res.status(400).json({success: false, message:"payment error"});
+        return ;
+      }
+      
       res.status(200).json({succesfull: true, result})
       
     } catch(error){

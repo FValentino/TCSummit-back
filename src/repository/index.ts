@@ -1,4 +1,5 @@
 export * from "./ticketRepository"
 export * from "./ticketTypeRepository"
+export * from "./ticketUseRepository"
 export * from "./clientRepository"
 export * from "./purchaseRepository"

@@ -15,12 +15,22 @@ export class TicketRepository{
     return this.repository.find();
   }
 
+  findById(id: number){
+    return this.repository.findOneBy({id: id});
+  }
+
+  findByUuid(uuid: string){
+    return this.repository.findOneBy({qrId: uuid});
+  }
+
   createTicket(ticketData: Partial<Ticket>){
-    const ticket = this.repository.create(ticketData)
+    const ticket = this.repository.create(ticketData);
     return this.repository.save(ticket);
   }
 
   updateTicket(id:number, ticketData: Partial<Ticket>){
     return this.repository.update(id, ticketData);
   }
+
+  
 }

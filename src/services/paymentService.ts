@@ -2,6 +2,13 @@ import { AppDataSource } from "../config/dataSource";
 import { Client, Purchase, Ticket, TicketType } from "../entity";
 import { ClientRepository, PurchaseRepository, TicketRepository, TicketTypeRepository } from "../repository";
 import { TicketInput } from "../types/ticket";
+import { v4 as uuidv4 } from "uuid"; 
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import QRCode from "qrcode";
+import { qrGenerator } from "../utilities/qr";
+
+dotenv.config();
 
 
 export class PaymentService{
@@ -16,13 +23,8 @@ export class PaymentService{
     await queryRunner.startTransaction();
 
     if(!ticketData || !clientData || !paymentId) {
-      throw new Error("Fala algun dato")
+      throw new Error("Falta algun dato")
     }
-
-    console.log("PARAMETERS PAYMENT SERVICES: ");
-    console.log("TICKETDATA: ", ticketData);
-    console.log("CLIENTDATA: ",clientData);
-    console.log("PAYMENTID: ",paymentId);
 
     try{
       const clientRepo = new ClientRepository(queryRunner.manager);
@@ -46,11 +48,16 @@ export class PaymentService{
       }
 
       for (let i=0; i<ticketData.quantity; i++){
+        const uuid = uuidv4();
+        const qr = await qrGenerator(uuid)
+        
         let ticket = await ticketRepo.createTicket({
+          qrId: uuid,
+          qrImage: qr,
           client,
           type
         })
-        
+
         tickets.push(ticket)
       }
 
@@ -61,7 +68,7 @@ export class PaymentService{
       })
       
       const newQuantity = type.quantity - ticketData.quantity;
-      await ticketTypeRepo.updateTicketType(ticketData.idType, {quantity: ticketData.quantity})
+      await ticketTypeRepo.updateTicketType(ticketData.idType, {quantity: newQuantity})
 
       await queryRunner.commitTransaction();
 

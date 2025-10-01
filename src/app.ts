@@ -4,6 +4,7 @@ import cors from "cors";
 import emailRoutes from "./routes/emailRoutes";
 import { AppDataSource } from "./config/dataSource";
 import paymentRoutes from "./routes/paymentRoutes";
+import ticketRouter from "./routes/ticketsRoutes";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ const initApp = async () => {
     app.get('/', (req, res) => res.send('Servidor funcionando'));
     
     app.use('/api/payment', paymentRoutes);
+    app.use('/api/tickets', ticketRouter);
     app.use("/api/email", emailRoutes);
 
 

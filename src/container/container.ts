@@ -1,4 +1,4 @@
-import { ClientRepository, TicketRepository } from "../repository";
+import { ClientRepository, TicketRepository, TicketUseRepository } from "../repository";
 import { ClientService, PaymentService, TicketService } from "../services";
 
 export class Container{
@@ -8,7 +8,7 @@ export class Container{
   private paymentService: PaymentService;
 
   constructor(){
-    this.ticketService = new TicketService(new TicketRepository())
+    this.ticketService = new TicketService(new TicketRepository(), new TicketUseRepository())
     this.clientService = new ClientService(new ClientRepository())
     this.paymentService = new PaymentService();
   }

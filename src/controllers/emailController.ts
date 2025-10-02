@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { EmailService } from "../services/email/emailService.js";
+import type { EmailService } from "../services/emailService";
 
 export class EmailController{
 

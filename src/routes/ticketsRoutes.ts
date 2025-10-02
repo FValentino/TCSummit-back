@@ -6,6 +6,7 @@ const TicketsController = new TicketController(container.getTicketService());
 
 const ticketRouter = express.Router();
 
+ticketRouter.get("/:uuid", TicketsController.getTicketByUuid);
 ticketRouter.post("/validate", TicketsController.validateTicket);
 
 export default ticketRouter;

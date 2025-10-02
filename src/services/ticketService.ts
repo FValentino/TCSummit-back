@@ -41,6 +41,19 @@ export class TicketService{
     }
   }
 
+  async getTyicketByUuid(uuid: string): Promise<Ticket>{
+    try{
+      const ticket = await this.ticketRepository.findByUuid(uuid);
+
+      if(!ticket) throw new Error("Entrada no encontrada");
+
+      return ticket;
+    } catch(error){
+      console.error("Error al obtener el ticket: ", error)
+      throw error
+    }
+  }
+
   async createTicket(ticketData: Partial<Ticket>): Promise<Ticket>{
     try{
       const result = await this.ticketRepository.createTicket(ticketData)

@@ -5,6 +5,8 @@ import emailRoutes from "./routes/emailRoutes";
 import { AppDataSource } from "./config/dataSource";
 import paymentRoutes from "./routes/paymentRoutes";
 import ticketRouter from "./routes/ticketsRoutes";
+import type { Response } from "express";
+import type { Request } from "express";
 
 dotenv.config();
 
@@ -29,7 +31,7 @@ const initApp = async () => {
     console.log("Conexion establecida")
 
     // Rutas
-    app.get('/', (req, res) => res.send('Servidor funcionando'));
+    app.get('/',  (req: Request, res: Response) => res.send('Servidor funcionando'));
     
     app.use('/api/payment', paymentRoutes);
     app.use('/api/tickets', ticketRouter);

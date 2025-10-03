@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { TicketService } from "../services";
-import { TicketInput } from "../types/ticket";
-import { validate } from "uuid";
 
 export class TicketController{
 
@@ -11,8 +9,9 @@ export class TicketController{
     this.ticketService = ticketService;
   }
 
-  getTicketByUuid = async(req: Request, res: Response)=>{
-    const uuid = req.params.uuid;
+  getTicketByUuid = async (req: Request, res:Response) => {
+    const  uuid  = req.params.uuid;
+    
     if (!uuid){
       res.status(400).json({validate: false, message: "No hay entrada"});
       return;
